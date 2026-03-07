@@ -1,0 +1,6 @@
+[31merror when starting preview server:
+Error: Server files not found at S:\camlc.dev\site\.svelte-kit\output\server, did you run `build` first?
+    at preview (file:///S:/camlc.dev/site/node_modules/@sveltejs/kit/src/exports/vite/preview/index.js:35:9)
+    at BasicMinimalPluginContext.configurePreviewServer (file:///S:/camlc.dev/site/node_modules/@sveltejs/kit/src/exports/vite/index.js:1008:11)
+    at preview (file:///S:/camlc.dev/site/node_modules/vite/dist/node/chunks/config.js:35117:104)
+    at async CAC.<anonymous> (file:///S:/camlc.dev/site/node_modules/vite/dist/node/cli.js:669:18)[39m

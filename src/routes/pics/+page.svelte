@@ -1,0 +1,78 @@
+<script lang="ts">
+	import { photoFrames } from '$lib/site-content';
+
+	const photoCount = `[${String(photoFrames.length).padStart(2, '0')}]`;
+	let activeFrame = $state<(typeof photoFrames)[number] | null>(null);
+
+	const openFrame = (frame: (typeof photoFrames)[number]) => {
+		activeFrame = frame;
+	};
+
+	const closeFrame = () => {
+		activeFrame = null;
+	};
+
+	const handleKeydown = (event: KeyboardEvent) => {
+		if (event.key === 'Escape') {
+			closeFrame();
+		}
+	};
+</script>
+
+<svelte:window onkeydown={handleKeydown} />
+<svelte:body class:pics-lightbox-open={activeFrame !== null} />
+
+<section class:blurred={activeFrame !== null} class="route-page route-page-wide pics-page">
+	<header class="route-header pics-header">
+		<p class="section-label">photo index</p>
+		<h1>
+			pics <span>{photoCount}</span>
+		</h1>
+		<p>
+			A small photo archive. Full-resolution web conversions from the original phone images,
+			kept fairly close to as-found.
+		</p>
+	</header>
+
+	<section class="pics-grid" aria-label="Photo grid">
+		{#each photoFrames as frame}
+			<figure class="pic-card">
+				<button
+					class="pic-button"
+					type="button"
+					onclick={() => {
+						openFrame(frame);
+					}}
+					aria-label={`Open ${frame.label}`}
+				>
+					<img class="pic-media" src={frame.src} alt={frame.alt} loading="lazy" />
+				</button>
+				<figcaption class="pic-meta">
+					<span>{frame.label}</span>
+					<span>{frame.meta}</span>
+				</figcaption>
+			</figure>
+		{/each}
+	</section>
+</section>
+
+{#if activeFrame}
+	<div
+		class="pic-lightbox"
+		role="dialog"
+		aria-modal="true"
+		aria-label={`${activeFrame.label} expanded`}
+		tabindex="-1"
+	>
+		<button class="pic-lightbox-backdrop" type="button" aria-label="Close image" onclick={closeFrame}></button>
+		<figure class="pic-lightbox-frame">
+			<img class="pic-lightbox-image" src={activeFrame.src} alt={activeFrame.alt} loading="eager" />
+			<figcaption class="pic-lightbox-meta">
+				<div>
+					<span>{activeFrame.label}</span>
+					<span>{activeFrame.meta}</span>
+				</div>
+			</figcaption>
+		</figure>
+	</div>
+{/if}

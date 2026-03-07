@@ -1,0 +1,45 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - link "Homepage" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e7]: camlc.dev policy / systems / interface
+      - navigation "Primary" [ref=e8]:
+        - link "home" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - link "about" [ref=e10] [cursor=pointer]:
+          - /url: /about
+        - link "projects" [ref=e11] [cursor=pointer]:
+          - /url: /projects
+        - link "blog" [ref=e12] [cursor=pointer]:
+          - /url: /blog
+        - link "contact" [ref=e13] [cursor=pointer]:
+          - /url: /contact
+    - generic [ref=e151]:
+      - generic [ref=e152]:
+        - heading "About" [level=1] [ref=e153]
+        - paragraph [ref=e154]: I work best where complexity needs to be made usable. My route through physics, defence, and business policy gave me a bias toward clarity, structure, and practical delivery.
+      - generic [ref=e155]:
+        - paragraph [ref=e156]: journey
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e159]: Smart Data Policy Adviser
+            - generic [ref=e160]: 2024 - present / Department for Business and Trade
+            - generic [ref=e161]: Policy direction, implementation constraints, and decision framing.
+          - generic [ref=e162]:
+            - generic [ref=e163]: PSA Development Team
+            - generic [ref=e164]: 2022 - 2024 / Ministry of Defence
+            - generic [ref=e165]: Worked across policy, analysis, and operational constraints.
+          - generic [ref=e166]:
+            - generic [ref=e167]: Physics Graduate
+            - generic [ref=e168]: 2023 / University of Surrey
+            - generic [ref=e169]: Built a base in structured reasoning and evidence-led analysis.
+      - generic [ref=e170]:
+        - paragraph [ref=e171]: principles
+        - generic [ref=e172]:
+          - generic [ref=e174]: Make complexity usable.
+          - generic [ref=e176]: Keep delivery visible.
+          - generic [ref=e178]: Prefer signal over performance.
+          - generic [ref=e180]: Align mixed teams quickly.
+  - generic [ref=e150]: camlc.dev

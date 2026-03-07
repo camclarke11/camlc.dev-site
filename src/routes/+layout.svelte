@@ -1,104 +1,80 @@
-<script>
+<script lang="ts">
+	import '@fontsource-variable/geist-mono';
 	import '../app.css';
+	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 
 	let { children } = $props();
+	let dividerDirection = $state<'forward' | 'reverse'>('forward');
+
+	const navItems = [
+		{ href: '/', label: 'home' },
+		{ href: '/about', label: 'about' },
+		{ href: '/projects', label: 'projects' },
+		{ href: '/blog', label: 'blog' },
+		{ href: '/pics', label: 'pics' },
+		{ href: '/contact', label: 'contact' }
+	];
+
+	onMount(() => {
+		let lastPointerX = 0;
+		const handlePointerMove = (event: PointerEvent) => {
+			if (lastPointerX === 0) {
+				lastPointerX = event.clientX;
+				return;
+			}
+
+			const deltaX = event.clientX - lastPointerX;
+			if (Math.abs(deltaX) > 2) {
+				dividerDirection = deltaX > 0 ? 'forward' : 'reverse';
+			}
+
+			lastPointerX = event.clientX;
+		};
+
+		window.addEventListener('pointermove', handlePointerMove, { passive: true });
+
+		return () => {
+			window.removeEventListener('pointermove', handlePointerMove);
+		};
+	});
 </script>
 
 <svelte:head>
 	<title>camlc.dev</title>
-	<meta name="description" content="Cam Clarke's personal website" />
+	<meta
+		name="description"
+		content="Cam Clarke's site on policy, systems, and interface work."
+	/>
 </svelte:head>
 
-<header class:home={page.url.pathname === '/'}>
-	<div class="row">
-		<a class="pfp" href="/" aria-label="homepage">
-			<!-- Minimalist Logo Placeholder -->
-			<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated logo">
-				<g><line x1="27.92" y1="150" x2="272.66" y2="150" stroke="rgb(189, 99, 238)" stroke-width="19.84" stroke-linecap="round"></line></g>
-				<g><line x1="27.92" y1="150" x2="272.66" y2="150" stroke="rgb(98, 98, 238)" stroke-width="19.84" stroke-linecap="round"></line></g>
-				<g><line x1="27.92" y1="150" x2="272.66" y2="150" stroke="rgb(38, 187, 217)" stroke-width="19.84" stroke-linecap="round"></line></g>
-			</svg>
-		</a>
-		<a href="/"><h1>camlc.dev</h1></a>
-	</div>
-	<nav>
-		<a class="nav" href="/about"><span class="arrow">-&gt;</span><span class="slash">/</span>about</a>
-		<a class="nav" href="/projects"><span class="arrow">-&gt;</span><span class="slash">/</span>projects</a>
-		<a class="nav" href="/blog"><span class="arrow">-&gt;</span><span class="slash">/</span>blog</a>
-		<a class="nav" href="/contact"><span class="arrow">-&gt;</span><span class="slash">/</span>contact</a>
-	</nav>
-</header>
+<svelte:body
+	class:portal-route={page.url.pathname === '/'}
+	class:standard-route={page.url.pathname !== '/'}
+	class:divider-forward={dividerDirection === 'forward'}
+	class:divider-reverse={dividerDirection === 'reverse'}
+/>
 
-<div class="container">
-	<div class="transition">
+<div class="site-shell">
+	<header class="site-header">
+		<a class="brand" href="/" aria-label="Homepage">
+			<img class="brand-mark" src="/logo.png" alt="" aria-hidden="true" />
+			<span>
+				<span class="brand-name">camlc.dev</span>
+				<span class="brand-note"> policy / systems / interface</span>
+			</span>
+		</a>
+
+		<nav class="primary-nav" aria-label="Primary">
+			{#each navItems as item}
+				<a class:active={page.url.pathname === item.href} class="nav-link" href={item.href}>
+					{item.label}
+				</a>
+			{/each}
+		</nav>
+	</header>
+
+	<div class="site-view">
 		{@render children()}
 	</div>
 </div>
-
-<style>
-	header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0 4rem;
-		height: 5rem;
-		overflow: hidden;
-		transition: transform .1s ease;
-		transform: translateY(0);
-		flex-shrink: 0;
-	}
-	header.home {
-		/* On home page, we might want to hide the header or change its style, but let's just keep it visible for now, or match refact0r's translated header */
-		transform: translateY(-70%);
-	}
-	header .row {
-		display: flex;
-		align-items: center;
-		gap: 1.5rem;
-	}
-	header .row .pfp {
-		display: flex;
-		width: 2rem;
-		height: 2rem;
-	}
-	header .row h1 {
-		font-size: 1.375rem;
-		color: var(--txt);
-		margin: 0;
-	}
-	header nav {
-		display: flex;
-		gap: 2.5rem;
-	}
-	header nav a {
-		font-size: 1.375rem;
-		font-family: 'Space Mono', monospace;
-	}
-	.container {
-		height: 100%;
-		display: grid;
-	}
-	.transition {
-		grid-column-start: 1;
-		grid-column-end: 2;
-		grid-row-start: 1;
-		grid-row-end: 2;
-		min-width: 0;
-	}
-
-	@media(max-width: 850px) {
-		header {
-			padding: 0 1.5rem;
-			gap: 1.5rem;
-		}
-		header nav {
-			gap: 1.5rem;
-		}
-	}
-	@media(max-width: 700px) {
-		header nav {
-			display: none;
-		}
-	}
-</style>

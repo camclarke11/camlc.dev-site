@@ -1,0 +1,151 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - link "Homepage" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e7]: camlc.dev policy / systems / interface
+      - navigation "Primary" [ref=e8]:
+        - link "home" [ref=e9] [cursor=pointer]:
+          - /url: /
+        - link "about" [ref=e10] [cursor=pointer]:
+          - /url: /about
+        - link "projects" [ref=e11] [cursor=pointer]:
+          - /url: /projects
+        - link "blog" [ref=e12] [cursor=pointer]:
+          - /url: /blog
+        - link "contact" [ref=e13] [cursor=pointer]:
+          - /url: /contact
+    - generic [ref=e184]:
+      - generic:
+        - generic: Scroll to move through the index
+      - generic "Site portal" [ref=e186]:
+        - article [ref=e187]:
+          - generic [ref=e188]:
+            - strong [ref=e189]: camlc.dev
+            - generic [ref=e190]: current
+          - generic [ref=e191]:
+            - generic [ref=e193]:
+              - img "Cam Clarke at a computer" [ref=e194]
+              - generic [ref=e195]: Cam Clarke / site index
+            - generic [ref=e196]:
+              - paragraph [ref=e197]: intro
+              - generic [ref=e198]:
+                - paragraph [ref=e199]: I work on Smart Data policy that has to function in the real world.
+                - paragraph [ref=e200]: I care about clear decisions, practical delivery plans, and interfaces that do not get in their own way.
+            - generic [ref=e202]:
+              - paragraph [ref=e203]: links
+              - generic [ref=e204]:
+                - generic [ref=e205]:
+                  - img [ref=e207]
+                  - link "LinkedIn" [ref=e209] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/your-profile/
+                  - link "Cam Clarke" [ref=e210] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/in/your-profile/
+                    - generic [ref=e211]: "|"
+                    - text: Cam Clarke
+                - generic [ref=e212]:
+                  - img [ref=e214]
+                  - link "GitHub" [ref=e216] [cursor=pointer]:
+                    - /url: https://github.com/camclarke11
+                  - link "camclarke11" [ref=e217] [cursor=pointer]:
+                    - /url: https://github.com/camclarke11
+                    - generic [ref=e218]: "|"
+                    - text: camclarke11
+                - generic [ref=e219]:
+                  - img [ref=e221]
+                  - link "Email" [ref=e223] [cursor=pointer]:
+                    - /url: mailto:camlc@proton.me
+                  - link "camlc@proton.me" [ref=e224] [cursor=pointer]:
+                    - /url: mailto:camlc@proton.me
+                    - generic [ref=e225]: "|"
+                    - text: camlc@proton.me
+        - article [ref=e226]:
+          - generic [ref=e228]: assorted projects
+          - generic [ref=e231]:
+            - generic [ref=e232]:
+              - link "Smart Data Policy Framework" [ref=e233] [cursor=pointer]:
+                - /url: /projects
+              - generic [ref=e234]: current
+              - generic [ref=e235]: Framework for scheme scope, safeguards, interoperability needs, and phased implementation choices.
+            - generic [ref=e236]:
+              - link "Portfolio Platform" [ref=e237] [cursor=pointer]:
+                - /url: /projects
+              - generic [ref=e238]: site
+              - generic [ref=e239]: A cleaner structure for writing, projects, and personal context.
+            - generic [ref=e240]:
+              - link "Physics Research Track" [ref=e241] [cursor=pointer]:
+                - /url: /projects
+              - generic [ref=e242]: archive
+              - generic [ref=e243]: Work that shaped how I handle uncertainty, argument, and evidence.
+        - article [ref=e244]:
+          - generic [ref=e246]: posts
+          - generic [ref=e247]:
+            - generic [ref=e248]:
+              - paragraph [ref=e249]: posts
+              - generic [ref=e250]:
+                - generic [ref=e251]:
+                  - link "The Future of Smart Data Policy" [ref=e252] [cursor=pointer]:
+                    - /url: /blog
+                  - generic [ref=e253]: Oct 12, 2024
+                - generic [ref=e254]:
+                  - link "From Physics to Policy" [ref=e255] [cursor=pointer]:
+                    - /url: /blog
+                  - generic [ref=e256]: Aug 5, 2024
+                - generic [ref=e257]:
+                  - link "Building This Portfolio" [ref=e258] [cursor=pointer]:
+                    - /url: /blog
+                  - generic [ref=e259]: May 20, 2024
+            - generic [ref=e261]:
+              - paragraph [ref=e262]: principles
+              - generic [ref=e263]:
+                - generic [ref=e265]: Make complexity usable.
+                - generic [ref=e267]: Keep delivery visible.
+                - generic [ref=e269]: Prefer signal over performance.
+                - generic [ref=e271]: Align mixed teams quickly.
+        - article [ref=e272]:
+          - generic [ref=e274]: talks
+          - generic [ref=e276]:
+            - paragraph [ref=e277]: talks
+            - generic [ref=e278]:
+              - generic [ref=e279]:
+                - link "Making delivery constraints visible earlier" [ref=e280] [cursor=pointer]:
+                  - /url: /blog
+                - generic [ref=e281]: Apr 2024
+              - generic [ref=e282]:
+                - link "Clearer structure for policy decisions" [ref=e283] [cursor=pointer]:
+                  - /url: /blog
+                - generic [ref=e284]: Jan 2024
+              - generic [ref=e285]:
+                - link "Complexity, evidence, and practical execution" [ref=e286] [cursor=pointer]:
+                  - /url: /blog
+                - generic [ref=e287]: Sep 2023
+        - article [ref=e288]:
+          - generic [ref=e290]: open work
+          - generic [ref=e292]:
+            - paragraph [ref=e293]: open work
+            - generic [ref=e294]:
+              - generic [ref=e295]:
+                - link "Policy Notes" [ref=e296] [cursor=pointer]:
+                  - /url: /projects
+                - generic [ref=e297]: drafts / writing
+                - generic [ref=e298]: Short essays and working notes on delivery, policy, and systems.
+              - generic [ref=e299]:
+                - link "UI Experiments" [ref=e300] [cursor=pointer]:
+                  - /url: /projects
+                - generic [ref=e301]: frontend / structure
+                - generic [ref=e302]: Small interface studies focused on hierarchy, restraint, and interaction.
+        - article [ref=e303]:
+          - generic [ref=e305]: contact
+          - generic [ref=e307]:
+            - paragraph [ref=e308]: contact
+            - generic [ref=e309]:
+              - generic [ref=e310]:
+                - generic [ref=e311]: Email
+                - generic [ref=e312]: cam.clarke@example.com
+              - generic [ref=e313]:
+                - generic [ref=e314]: Available for
+                - generic [ref=e315]: policy structure, interface cleanup, and writing systems
+              - link "Open contact page" [ref=e317] [cursor=pointer]:
+                - /url: /contact
+  - generic [ref=e150]: camlc.dev
