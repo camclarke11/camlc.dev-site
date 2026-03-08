@@ -5,7 +5,6 @@
 		introParagraphs,
 		openSource,
 		posts,
-		principles,
 		projects,
 		socialLinks,
 		talks
@@ -312,19 +311,6 @@
 										<div class="item-preview">
 											<div class="item-copy">{post.preview}</div>
 										</div>
-									</div>
-								{/each}
-							</div>
-						</section>
-
-						<div class="section-rule" aria-hidden="true"></div>
-
-						<section class="column-section">
-							<p class="section-label">principles</p>
-							<div class="item-list">
-								{#each principles as principle}
-									<div class="item">
-										<div class="item-copy">{principle}</div>
 									</div>
 								{/each}
 							</div>

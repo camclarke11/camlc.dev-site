@@ -42,6 +42,8 @@
 
 <svelte:head>
 	<title>camlc.dev</title>
+	<link rel="icon" href="/logo.png" />
+	<link rel="apple-touch-icon" href="/logo.png" />
 	<meta
 		name="description"
 		content="Cam Clarke's site on policy, systems, and interface work."
