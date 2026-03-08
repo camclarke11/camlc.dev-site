@@ -201,10 +201,6 @@
 				style:transform={isDesktop ? boardTransform : undefined}
 			>
 				<article class="portal-column">
-					<div class="column-header">
-						<strong>camlc.dev</strong>
-					</div>
-
 					<div class="column-stack">
 						<section class="column-section">
 							<div class="visual-block">
