@@ -98,6 +98,7 @@ svg {
 }
 
 .site-header {
+  position: relative;
   height: 2.75rem;
   display: flex;
   align-items: center;
@@ -204,37 +205,24 @@ svg {
 
 .portal-guidance {
   position: absolute;
-  top: 1rem;
-  right: 1.25rem;
+  top: 0;
+  left: 1.1rem;
+  right: 1.1rem;
   z-index: 2;
-  display: grid;
-  justify-items: end;
-  gap: 0.45rem;
-  width: min(7rem, calc(100vw - 2.5rem));
-  color: var(--text-soft);
   pointer-events: none;
 }
 
-.portal-guidance-icon {
-  width: 2.6rem;
-  opacity: 0.8;
-  animation: portal-guidance-drift 2.8s ease-in-out infinite;
-}
-
-.portal-guidance-icon svg {
-  width: 100%;
-  height: auto;
-  stroke: var(--text-soft);
-  stroke-width: 1.1;
-  stroke-linecap: square;
-  stroke-linejoin: miter;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.08));
+.portal-viewport {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
 }
 
 .portal-progress-track {
-  width: 4.75rem;
+  position: relative;
+  width: 100%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.14));
   overflow: hidden;
 }
 
@@ -243,12 +231,7 @@ svg {
   height: 100%;
   transform-origin: left center;
   background: linear-gradient(90deg, var(--accent-faint), var(--accent-glow));
-}
-
-.portal-viewport {
-  position: relative;
-  height: 100%;
-  overflow: hidden;
+  box-shadow: 0 0 0.75rem rgba(111, 162, 140, 0.22);
 }
 
 .portal-viewport::before,
@@ -644,6 +627,10 @@ a.item-title:focus-visible {
   gap: 0.35rem;
 }
 
+.route-item[id] {
+  scroll-margin-top: 4.25rem;
+}
+
 .route-item-title {
   color: var(--text);
   font-size: 1rem;
@@ -664,6 +651,29 @@ a.item-title:focus-visible {
   display: grid;
   gap: 0.9rem;
   max-width: 38rem;
+}
+
+.form-status {
+  margin: 0;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-soft);
+}
+
+.form-status-success {
+  color: var(--text);
+}
+
+.form-status-error {
+  color: var(--email-hover);
+}
+
+.contact-form-honeypot {
+  position: absolute;
+  left: -100vw;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .contact-form label {
@@ -873,7 +883,6 @@ a.item-title:focus-visible {
     scroll-behavior: auto !important;
   }
 
-  .portal-guidance-icon,
   .portal-board,
   .portal-progress-bar {
     transition: none !important;
@@ -897,18 +906,6 @@ a.item-title:focus-visible {
   .section-rule::after,
   .route-block::before {
     animation: none !important;
-  }
-}
-
-@keyframes portal-guidance-drift {
-  0%,
-  100% {
-    transform: translateX(0);
-    opacity: 0.62;
-  }
-  50% {
-    transform: translateX(0.32rem);
-    opacity: 0.95;
   }
 }
 
@@ -953,12 +950,12 @@ a.item-title:focus-visible {
     background: var(--bg);
   }
 
-  .portal-guidance {
+  .portal-viewport::before,
+  .portal-viewport::after {
     display: none;
   }
 
-  .portal-viewport::before,
-  .portal-viewport::after {
+  .portal-guidance {
     display: none;
   }
 

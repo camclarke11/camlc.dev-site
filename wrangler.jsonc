@@ -10,6 +10,12 @@
     "binding": "ASSETS",
     "directory": ".svelte-kit/cloudflare"
   },
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "destination_address": "camlc@proton.me"
+    }
+  ],
   "workers_dev": true,
   "preview_urls": true,
   "observability": {

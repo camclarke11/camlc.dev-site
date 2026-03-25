@@ -2,12 +2,12 @@
 	import { onMount } from 'svelte';
 	import SocialIcon from '$lib/components/SocialIcon.svelte';
 	import {
+		interests,
 		introParagraphs,
-		openSource,
-		posts,
+		philosophyNotes,
 		projects,
 		socialLinks,
-		talks
+		writingTopics
 	} from '$lib/site-content';
 
 	let portalPage: HTMLElement;
@@ -179,14 +179,7 @@
 
 <section class="portal-page" bind:this={portalPage} style:height={portalHeight || undefined}>
 	<div class="portal-sticky" bind:this={stickyViewport}>
-		<div class="portal-guidance" aria-hidden={!isDesktop} aria-label="Scroll to move through the index">
-			<div class="portal-guidance-icon" aria-hidden="true">
-				<svg viewBox="0 0 40 14" fill="none">
-					<path d="M2 7h24" />
-					<path d="m20 2 6 5-6 5" />
-					<path d="m30 2 6 5-6 5" />
-				</svg>
-			</div>
+		<div class="portal-guidance" aria-hidden={!isDesktop} aria-label="Scroll progress">
 			<div class="portal-progress-track">
 				<div class="portal-progress-bar" style:transform={`scaleX(${progressScale})`}></div>
 			</div>
@@ -243,11 +236,43 @@
 
 				<article class="portal-column">
 					<div class="column-header">
-						<span>assorted projects</span>
+						<span>interests</span>
 					</div>
 
 					<div class="column-stack">
 						<section class="column-section">
+							<p class="section-label">what I'm interested in</p>
+							<div class="item-list">
+								{#each interests as interest}
+									<div
+										class:item-preview-open={isPreviewOpen(`interest-${interest.title}`)}
+										class="item item-previewable"
+										role="group"
+										onmouseenter={() => openPreview(`interest-${interest.title}`)}
+										onmouseleave={() => closePreview(`interest-${interest.title}`)}
+										onfocusin={() => openPreview(`interest-${interest.title}`)}
+										onfocusout={(event) => handlePreviewFocusOut(event, `interest-${interest.title}`)}
+									>
+										<div class="item-title">{interest.title}</div>
+										<div class="item-meta">{interest.meta}</div>
+										<div class="item-preview">
+											<div class="item-copy">{interest.summary}</div>
+										</div>
+									</div>
+								{/each}
+							</div>
+						</section>
+					</div>
+				</article>
+
+				<article class="portal-column">
+					<div class="column-header">
+						<span>projects</span>
+					</div>
+
+					<div class="column-stack">
+						<section class="column-section">
+							<p class="section-label">what I'm building</p>
 							<div class="item-list">
 								{#each projects as project}
 									<div
@@ -279,33 +304,33 @@
 
 				<article class="portal-column">
 					<div class="column-header">
-						<span>posts</span>
+						<span>writing</span>
 					</div>
 
 					<div class="column-stack">
 						<section class="column-section">
-							<p class="section-label">posts</p>
+							<p class="section-label">what I write about</p>
 							<div class="item-list">
-								{#each posts as post}
+								{#each writingTopics as topic}
 									<div
-										class:item-preview-open={isPreviewOpen(`post-${post.title}`)}
+										class:item-preview-open={isPreviewOpen(`writing-${topic.title}`)}
 										class="item item-previewable"
 										role="group"
-										onmouseenter={() => openPreview(`post-${post.title}`)}
-										onmouseleave={() => closePreview(`post-${post.title}`)}
-										onfocusin={() => openPreview(`post-${post.title}`)}
-										onfocusout={(event) => handlePreviewFocusOut(event, `post-${post.title}`)}
+										onmouseenter={() => openPreview(`writing-${topic.title}`)}
+										onmouseleave={() => closePreview(`writing-${topic.title}`)}
+										onfocusin={() => openPreview(`writing-${topic.title}`)}
+										onfocusout={(event) => handlePreviewFocusOut(event, `writing-${topic.title}`)}
 									>
 										<a
 											class="item-title"
-											href={post.href}
-											onclick={(event) => handlePreviewClick(event, `post-${post.title}`)}
+											href={topic.href}
+											onclick={(event) => handlePreviewClick(event, `writing-${topic.title}`)}
 										>
-											{post.title}
+											{topic.title}
 										</a>
-										<div class="item-date">{post.date}</div>
+										<div class="item-meta">{topic.meta}</div>
 										<div class="item-preview">
-											<div class="item-copy">{post.preview}</div>
+											<div class="item-copy">{topic.summary}</div>
 										</div>
 									</div>
 								{/each}
@@ -316,70 +341,33 @@
 
 				<article class="portal-column">
 					<div class="column-header">
-						<span>talks</span>
+						<span>philosophy</span>
 					</div>
 
 					<div class="column-stack">
 						<section class="column-section">
-							<p class="section-label">talks</p>
+							<p class="section-label">how I think</p>
 							<div class="item-list">
-								{#each talks as talk}
+								{#each philosophyNotes as note}
 									<div
-										class:item-preview-open={isPreviewOpen(`talk-${talk.title}`)}
+										class:item-preview-open={isPreviewOpen(`philosophy-${note.title}`)}
 										class="item item-previewable"
 										role="group"
-										onmouseenter={() => openPreview(`talk-${talk.title}`)}
-										onmouseleave={() => closePreview(`talk-${talk.title}`)}
-										onfocusin={() => openPreview(`talk-${talk.title}`)}
-										onfocusout={(event) => handlePreviewFocusOut(event, `talk-${talk.title}`)}
+										onmouseenter={() => openPreview(`philosophy-${note.title}`)}
+										onmouseleave={() => closePreview(`philosophy-${note.title}`)}
+										onfocusin={() => openPreview(`philosophy-${note.title}`)}
+										onfocusout={(event) => handlePreviewFocusOut(event, `philosophy-${note.title}`)}
 									>
 										<a
 											class="item-title"
-											href={talk.href}
-											onclick={(event) => handlePreviewClick(event, `talk-${talk.title}`)}
+											href={note.href}
+											onclick={(event) => handlePreviewClick(event, `philosophy-${note.title}`)}
 										>
-											{talk.title}
+											{note.title}
 										</a>
-										<div class="item-date">{talk.date}</div>
+										<div class="item-meta">{note.meta}</div>
 										<div class="item-preview">
-											<div class="item-copy">{talk.preview}</div>
-										</div>
-									</div>
-								{/each}
-							</div>
-						</section>
-					</div>
-				</article>
-
-				<article class="portal-column">
-					<div class="column-header">
-						<span>open work</span>
-					</div>
-
-					<div class="column-stack">
-						<section class="column-section">
-							<p class="section-label">open work</p>
-							<div class="item-list">
-								{#each openSource as item}
-									<div
-										class:item-preview-open={isPreviewOpen(`work-${item.title}`)}
-										class="item item-previewable"
-										role="group"
-										onmouseenter={() => openPreview(`work-${item.title}`)}
-										onmouseleave={() => closePreview(`work-${item.title}`)}
-										onfocusin={() => openPreview(`work-${item.title}`)}
-										onfocusout={(event) => handlePreviewFocusOut(event, `work-${item.title}`)}
-									>
-										<a
-											class="item-title"
-											href={item.href}
-											onclick={(event) => handlePreviewClick(event, `work-${item.title}`)}
-										>
-											{item.title}
-										</a>
-										<div class="item-meta">{item.meta}</div>
-										<div class="item-preview">
-											<div class="item-copy">{item.summary}</div>
+											<div class="item-copy">{note.summary}</div>
 										</div>
 									</div>
 								{/each}
@@ -399,11 +387,11 @@
 							<div class="item-list">
 								<div class="item">
 									<div class="item-title">Email</div>
-									<div class="item-copy">cam.clarke@example.com</div>
+									<div class="item-copy">camlc@proton.me</div>
 								</div>
 								<div class="item">
-									<div class="item-title">Available for</div>
-									<div class="item-copy">policy structure, interface cleanup, and writing systems</div>
+									<div class="item-title">Talk to me about</div>
+									<div class="item-copy">data ecosystems, AI projects, policy, and interesting internet ideas</div>
 								</div>
 								<div class="item">
 									<a class="item-title" href="/contact">Open contact page</a>

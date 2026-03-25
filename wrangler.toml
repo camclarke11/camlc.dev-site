@@ -7,6 +7,10 @@ compatibility_date = "2026-03-07"
 directory = ".svelte-kit/cloudflare"
 binding = "ASSETS"
 
+[[send_email]]
+name = "CONTACT_EMAIL"
+destination_address = "camlc@proton.me"
+
 [[routes]]
 pattern = "camlc.dev"
 custom_domain = true

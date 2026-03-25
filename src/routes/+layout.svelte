@@ -11,7 +11,7 @@
 		{ href: '/', label: 'home' },
 		{ href: '/about', label: 'about' },
 		{ href: '/projects', label: 'projects' },
-		{ href: '/blog', label: 'blog' },
+		{ href: '/blog', label: 'writing' },
 		{ href: '/pics', label: 'pics' },
 		{ href: '/contact', label: 'contact' }
 	];
@@ -46,7 +46,7 @@
 	<link rel="apple-touch-icon" href="/logo.png" />
 	<meta
 		name="description"
-		content="Cam Clarke's site on policy, systems, and interface work."
+		content="Cam Clarke's site on data, technology, policy, and open ecosystems."
 	/>
 </svelte:head>
 
@@ -63,7 +63,7 @@
 			<img class="brand-mark" src="/logo.png" alt="" aria-hidden="true" />
 			<span>
 				<span class="brand-name">camlc.dev</span>
-				<span class="brand-note"> policy / systems / interface</span>
+				<span class="brand-note"> data / technology / policy</span>
 			</span>
 		</a>
 

@@ -1,8 +1,10 @@
 export type SocialLinkKind = 'linkedin' | 'github' | 'email';
 
 export const introParagraphs = [
-	'I work on Smart Data policy that has to function in the real world.',
-	'I care about clear decisions, practical delivery plans, and interfaces that do not get in their own way.'
+	"Hi, I'm Cam.",
+	'I work on data, technology, and policy - mostly figuring out how data should move between companies and people without everything breaking.',
+	"By day I'm in the UK government working on Smart Data and digital markets. By night I'm usually building something: websites, AI tools, small data experiments, or ideas that may or may not become startups.",
+	"If it involves data, APIs, open ecosystems, or weird internet projects, I'm probably interested."
 ];
 
 export const socialLinks = [
@@ -26,96 +28,122 @@ export const socialLinks = [
 	}
 ];
 
+export const interests = [
+	{
+		title: 'Smart Data',
+		meta: 'data rights',
+		summary: 'How people access and control the data companies hold about them.'
+	},
+	{
+		title: 'Digital markets',
+		meta: 'platform power',
+		summary: 'What happens when large platforms become infrastructure.'
+	},
+	{
+		title: 'APIs and data ecosystems',
+		meta: 'plumbing',
+		summary: 'The boring plumbing that actually makes open systems work.'
+	},
+	{
+		title: 'AI as a tool for thinking',
+		meta: 'models',
+		summary: 'Using models to explore ideas, generate structures, and build faster.'
+	},
+	{
+		title: 'Internet side projects',
+		meta: 'experiments',
+		summary: 'Sometimes useful, sometimes pointless, usually fun.'
+	}
+];
+
 export const projects = [
 	{
-		title: 'Smart Data Policy Framework',
-		tag: 'current',
+		title: 'Smart Data Mapping',
+		tag: 'policy / systems',
+		href: '/projects',
+		summary: 'Tools and visualisations exploring how data portability could work across sectors.'
+	},
+	{
+		title: 'AI Course Builder',
+		tag: 'AI / product',
 		href: '/projects',
 		summary:
-			'Framework for scheme scope, safeguards, interoperability needs, and phased implementation choices.'
+			'A system that generates a full learning curriculum on any topic, including chapters, lessons, and progress tracking.'
 	},
 	{
-		title: 'Portfolio Platform',
-		tag: 'site',
+		title: 'Clip Detection AI',
+		tag: 'media / ML',
 		href: '/projects',
-		summary: 'A cleaner structure for writing, projects, and personal context.'
+		summary:
+			'Experiments analysing livestream chat and video to detect highlight moments automatically.'
 	},
 	{
-		title: 'Physics Research Track',
-		tag: 'archive',
+		title: 'Random Internet Experiments',
+		tag: 'scrapers / tools',
 		href: '/projects',
-		summary: 'Work that shaped how I handle uncertainty, argument, and evidence.'
+		summary:
+			'Scrapers, dashboards, automation tools, and other things that seemed like a good idea at the time.'
 	}
 ];
 
-export const openSource = [
+export const writingTopics = [
 	{
-		title: 'Policy Notes',
-		meta: 'drafts / writing',
-		href: '/projects',
-		summary: 'Short essays and working notes on delivery, policy, and systems.'
+		slug: 'smart-data-policy',
+		title: 'Smart Data policy',
+		meta: 'policy / essays',
+		href: '/blog#smart-data-policy',
+		summary: 'How data portability, access, and safeguards can work in real systems.',
+		focus:
+			'Usually about switching, consent, interoperability, and where the policy logic breaks under delivery pressure.'
 	},
 	{
-		title: 'UI Experiments',
-		meta: 'frontend / structure',
-		href: '/projects',
-		summary: 'Small interface studies focused on hierarchy, restraint, and interaction.'
+		slug: 'digital-markets',
+		title: 'Digital markets',
+		meta: 'platforms / notes',
+		href: '/blog#digital-markets',
+		summary: 'Notes on platform power, infrastructure, and how markets become rules.',
+		focus:
+			'The recurring theme is what happens when a private platform starts behaving like public infrastructure.'
+	},
+	{
+		slug: 'data-ecosystems-in-practice',
+		title: 'Data ecosystems in practice',
+		meta: 'systems / explainers',
+		href: '/blog#data-ecosystems-in-practice',
+		summary: 'What actually has to happen behind the scenes to make open ecosystems usable.',
+		focus:
+			'Less theory, more on standards, APIs, incentives, governance, and the awkward plumbing underneath.'
+	},
+	{
+		slug: 'building-projects-in-public',
+		title: 'Building projects in public',
+		meta: 'build log / notes',
+		href: '/blog#building-projects-in-public',
+		summary: 'Things I am learning while building web apps, tools, and experiments.',
+		focus:
+			'Mostly short notes on shipping quickly, finding useful abstractions, and learning by making.'
 	}
 ];
 
-export const posts = [
+export const philosophyNotes = [
 	{
-		date: 'Oct 12, 2024',
-		href: '/blog',
-		preview:
-			'A working note on building policy systems that can survive operational detail, institutional constraints, and delivery sequencing.',
-		title: 'The Future of Smart Data Policy'
+		title: 'Between disciplines',
+		meta: 'philosophy',
+		href: '/about',
+		summary: 'I tend to think the most interesting work happens between disciplines.'
 	},
 	{
-		date: 'Aug 5, 2024',
-		href: '/blog',
-		preview:
-			'How a physics background shaped my approach to uncertainty, evidence, and making cleaner decisions in live policy work.',
-		title: 'From Physics to Policy'
+		title: 'Policy should meet product',
+		meta: 'philosophy',
+		href: '/about',
+		summary: "Policy people often do not build things. Builders often ignore how systems actually get governed."
 	},
 	{
-		date: 'May 20, 2024',
-		href: '/blog',
-		preview:
-			'Notes on reducing visual noise, tightening hierarchy, and making a personal site feel more like an index than a landing page.',
-		title: 'Building This Portfolio'
+		title: 'That is the useful space',
+		meta: 'philosophy',
+		href: '/about',
+		summary: "The interesting space is where those two meet, and that is where I'm trying to spend more time."
 	}
-];
-
-export const talks = [
-	{
-		date: 'Apr 2024',
-		href: '/blog',
-		preview:
-			'A short talk on surfacing delivery constraints early enough that teams can make better tradeoffs before policy hardens.',
-		title: 'Making delivery constraints visible earlier'
-	},
-	{
-		date: 'Jan 2024',
-		href: '/blog',
-		preview:
-			'An argument for clearer decision structures so policy work stays legible across mixed teams, owners, and timelines.',
-		title: 'Clearer structure for policy decisions'
-	},
-	{
-		date: 'Sep 2023',
-		href: '/blog',
-		preview:
-			'Reflections on handling complexity without theatricality: evidence first, structure second, polish last.',
-		title: 'Complexity, evidence, and practical execution'
-	}
-];
-
-export const principles = [
-	'Make complexity usable.',
-	'Keep delivery visible.',
-	'Prefer signal over performance.',
-	'Align mixed teams quickly.'
 ];
 
 export const photoFrames = [

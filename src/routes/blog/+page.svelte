@@ -1,34 +1,39 @@
 <script lang="ts">
-	import { posts, talks } from '$lib/site-content';
+	import { writingTopics } from '$lib/site-content';
 </script>
 
 <section class="route-page">
 	<header class="route-header">
-		<h1>Blog</h1>
-		<p>Writing and talks on policy execution, structure, and systems.</p>
+		<h1>Writing</h1>
+		<p>
+			I write occasionally about Smart Data policy, digital markets, how data ecosystems
+			actually work, and things I'm learning while building projects.
+		</p>
 	</header>
 
 	<section class="route-block">
-		<p class="section-label">posts</p>
+		<p class="section-label">topic index</p>
 		<div class="route-list">
-			{#each posts as item}
-				<div class="route-item">
+			{#each writingTopics as item}
+				<article class="route-item" id={item.slug}>
 					<a class="route-item-title" href={item.href}>{item.title}</a>
-					<div class="route-item-meta">{item.date}</div>
-				</div>
+					<div class="route-item-meta">{item.meta}</div>
+					<div class="route-item-copy">{item.summary}</div>
+					<div class="route-item-copy">{item.focus}</div>
+				</article>
 			{/each}
 		</div>
 	</section>
 
 	<section class="route-block">
-		<p class="section-label">talks</p>
+		<p class="section-label">format</p>
 		<div class="route-list">
-			{#each talks as item}
-				<div class="route-item">
-					<a class="route-item-title" href={item.href}>{item.title}</a>
-					<div class="route-item-meta">{item.date}</div>
+			<div class="route-item">
+				<div class="route-item-copy">
+					Some pieces are structured essays. Others are just notes that seemed worth writing
+					down.
 				</div>
-			{/each}
+			</div>
 		</div>
 	</section>
 </section>

@@ -1,12 +1,22 @@
 <script lang="ts">
 	import SocialIcon from '$lib/components/SocialIcon.svelte';
 	import { socialLinks } from '$lib/site-content';
+	import type { ActionData } from './$types';
+
+	type Props = {
+		form?: ActionData;
+	};
+
+	let { form }: Props = $props();
 </script>
 
 <section class="route-page">
 	<header class="route-header">
 		<h1>Contact</h1>
-		<p>Reach out with context, constraints, and what needs to change.</p>
+		<p>
+			If you want to talk about data ecosystems, AI projects, policy, or interesting internet
+			ideas, feel free to reach out.
+		</p>
 	</header>
 
 	<section class="route-block">
@@ -29,20 +39,35 @@
 
 	<section class="route-block">
 		<p class="section-label">message</p>
-		<form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+		<form class="contact-form" method="POST">
+			{#if form?.success}
+				<p class="form-status form-status-success" role="status">{form.message}</p>
+			{:else if form?.error}
+				<p class="form-status form-status-error" role="alert">{form.error}</p>
+			{/if}
+
+			<label class="contact-form-honeypot" aria-hidden="true">
+				Company
+				<input type="text" name="company" tabindex="-1" autocomplete="off" />
+			</label>
 			<label>
 				Name
-				<input type="text" name="name" required />
+				<input type="text" name="name" required value={form?.values?.name ?? ''} />
 			</label>
 			<label>
 				Email
-				<input type="email" name="email" required />
+				<input type="email" name="email" required value={form?.values?.email ?? ''} />
 			</label>
 			<label>
 				Message
-				<textarea name="message" rows="7" required></textarea>
+				<textarea
+					name="message"
+					rows="7"
+					required
+					placeholder="What are you building, exploring, or trying to figure out?"
+				>{form?.values?.message ?? ''}</textarea>
 			</label>
-			<button type="submit">Submit -&gt;</button>
+			<button type="submit">Send message -&gt;</button>
 		</form>
 	</section>
 </section>
