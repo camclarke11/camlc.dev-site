@@ -2,6 +2,10 @@
 	import { projects } from '$lib/site-content';
 </script>
 
+<svelte:head>
+	<title>Projects — camlc.dev</title>
+</svelte:head>
+
 <section class="route-page">
 	<header class="route-header">
 		<h1>Projects</h1>

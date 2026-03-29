@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
+	import { socialLinks } from '$lib/site-content';
 
 	let { children } = $props();
 	let dividerDirection = $state<'forward' | 'reverse'>('forward');
@@ -27,7 +28,11 @@
 		if (viewEl) viewEl.classList.add('view-exit');
 	});
 
-	afterNavigate(() => {
+	afterNavigate(({ from, to }) => {
+		if (from && to && from.url.pathname !== to.url.pathname) {
+			window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+		}
+
 		if (viewEl) {
 			viewEl.classList.remove('view-exit');
 			viewEl.classList.add('view-enter');
@@ -64,7 +69,6 @@
 </script>
 
 <svelte:head>
-	<title>camlc.dev</title>
 	<link rel="icon" href="/logo.png" />
 	<link rel="apple-touch-icon" href="/logo.png" />
 	<meta
@@ -102,4 +106,18 @@
 	<div class="site-view" bind:this={viewEl}>
 		{@render children()}
 	</div>
+
+	<footer class="site-footer">
+		<div class="site-footer-inner">
+			<div class="site-footer-copy">camlc.dev</div>
+			<nav class="site-footer-links" aria-label="Footer">
+				<a href="/contact">contact</a>
+				{#each socialLinks as link}
+					<a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
+						{link.label.toLowerCase()}
+					</a>
+				{/each}
+			</nav>
+		</div>
+	</footer>
 </div>

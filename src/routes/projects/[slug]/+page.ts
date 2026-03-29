@@ -14,5 +14,5 @@ export const load: PageLoad = ({ params }) => {
 	const prev = index > 0 ? projects[index - 1] : null;
 	const next = index < projects.length - 1 ? projects[index + 1] : null;
 
-	return { project, prev, next };
+	return { project, prev, next, projectIndex: index };
 };

@@ -3,6 +3,7 @@
 
 	const photoCount = `[${String(photoFrames.length).padStart(2, '0')}]`;
 	let activeFrame = $state<(typeof photoFrames)[number] | null>(null);
+	let loadedFrames = $state<Record<string, boolean>>({});
 	let activeIndex = $derived(activeFrame ? photoFrames.indexOf(activeFrame) : -1);
 	let hasPrev = $derived(activeIndex > 0);
 	let hasNext = $derived(activeIndex >= 0 && activeIndex < photoFrames.length - 1);
@@ -30,6 +31,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Pics — camlc.dev</title>
+</svelte:head>
+
 <svelte:window onkeydown={handleKeydown} />
 <svelte:body class:pics-lightbox-open={activeFrame !== null} />
 
@@ -47,7 +52,7 @@
 
 	<section class="pics-grid" aria-label="Photo grid">
 		{#each photoFrames as frame}
-			<figure class="pic-card">
+			<figure class:pic-card-loaded={loadedFrames[frame.src]} class="pic-card">
 				<button
 					class="pic-button"
 					type="button"
@@ -56,7 +61,15 @@
 					}}
 					aria-label={`Open ${frame.label}`}
 				>
-					<img class="pic-media" src={frame.src} alt={frame.alt} loading="lazy" />
+					<img
+						class="pic-media"
+						src={frame.src}
+						alt={frame.alt}
+						loading="lazy"
+						onload={() => {
+							loadedFrames = { ...loadedFrames, [frame.src]: true };
+						}}
+					/>
 				</button>
 				<figcaption class="pic-meta">
 					<span>{frame.label}</span>

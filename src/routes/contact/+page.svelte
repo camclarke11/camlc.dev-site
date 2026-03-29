@@ -10,6 +10,10 @@
 	let { form }: Props = $props();
 </script>
 
+<svelte:head>
+	<title>Contact — camlc.dev</title>
+</svelte:head>
+
 <section class="route-page">
 	<header class="route-header">
 		<h1>Contact</h1>

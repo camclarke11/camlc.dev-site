@@ -166,6 +166,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Cam Clarke — camlc.dev</title>
+</svelte:head>
+
 <svelte:window onscroll={syncFromScroll} onresize={measure} />
 
 <section class="portal-page" bind:this={portalPage} style:height={portalHeight || undefined}>
