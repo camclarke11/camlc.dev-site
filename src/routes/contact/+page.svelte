@@ -39,35 +39,40 @@
 
 	<section class="route-block">
 		<p class="section-label">message</p>
-		<form class="contact-form" method="POST">
-			{#if form?.success}
-				<p class="form-status form-status-success" role="status">{form.message}</p>
-			{:else if form?.error}
-				<p class="form-status form-status-error" role="alert">{form.error}</p>
-			{/if}
+		{#if form?.success}
+			<div class="form-status form-status-success" role="status">
+				<p>{form.message}</p>
+				<button class="showcase-link" type="button" onclick={() => { form = undefined; }}>Send another &rarr;</button>
+			</div>
+		{:else}
+			<form class="contact-form" method="POST">
+				{#if form?.error}
+					<p class="form-status form-status-error" role="alert">{form.error}</p>
+				{/if}
 
-			<label class="contact-form-honeypot" aria-hidden="true">
-				Company
-				<input type="text" name="company" tabindex="-1" autocomplete="off" />
-			</label>
-			<label>
-				Name
-				<input type="text" name="name" required value={form?.values?.name ?? ''} />
-			</label>
-			<label>
-				Email
-				<input type="email" name="email" required value={form?.values?.email ?? ''} />
-			</label>
-			<label>
-				Message
-				<textarea
-					name="message"
-					rows="7"
-					required
-					placeholder="What are you building, exploring, or trying to figure out?"
-				>{form?.values?.message ?? ''}</textarea>
-			</label>
-			<button type="submit">Send message -&gt;</button>
-		</form>
+				<label class="contact-form-honeypot" aria-hidden="true">
+					Company
+					<input type="text" name="company" tabindex="-1" autocomplete="off" />
+				</label>
+				<label>
+					Name
+					<input type="text" name="name" required autocomplete="name" value={form?.values?.name ?? ''} />
+				</label>
+				<label>
+					Email
+					<input type="email" name="email" required autocomplete="email" value={form?.values?.email ?? ''} />
+				</label>
+				<label>
+					Message
+					<textarea
+						name="message"
+						rows="7"
+						required
+						placeholder="What are you building, exploring, or trying to figure out?"
+					>{form?.values?.message ?? ''}</textarea>
+				</label>
+				<button type="submit">Send message -&gt;</button>
+			</form>
+		{/if}
 	</section>
 </section>

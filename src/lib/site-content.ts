@@ -56,33 +56,86 @@ export const interests = [
 	}
 ];
 
-export const projects = [
+export type ProjectLink = {
+	label: string;
+	href: string;
+	kind: 'github' | 'live' | 'docs' | 'other';
+};
+
+export type Project = {
+	slug: string;
+	title: string;
+	tag: string;
+	status: 'active' | 'archived' | 'idea';
+	summary: string;
+	description: string[];
+	stack: string[];
+	links: ProjectLink[];
+};
+
+export const projects: Project[] = [
 	{
+		slug: 'smart-data-mapping',
 		title: 'Smart Data Mapping',
 		tag: 'policy / systems',
-		href: '/projects',
-		summary: 'Tools and visualisations exploring how data portability could work across sectors.'
+		status: 'active',
+		summary: 'Tools and visualisations exploring how data portability could work across sectors.',
+		description: [
+			'Smart Data schemes give people the right to share their data with authorised third parties. This project maps out how those schemes connect, where the standards overlap, and where they diverge.',
+			'The goal is to make the cross-sector landscape legible — which sectors have mandated APIs, what data is portable, and where the gaps are.'
+		],
+		stack: ['SvelteKit', 'D3', 'TypeScript'],
+		links: [
+			{ label: 'GitHub', href: 'https://github.com/camclarke11/smart-data-mapping', kind: 'github' }
+		]
 	},
 	{
+		slug: 'ai-course-builder',
 		title: 'AI Course Builder',
 		tag: 'AI / product',
-		href: '/projects',
+		status: 'active',
 		summary:
-			'A system that generates a full learning curriculum on any topic, including chapters, lessons, and progress tracking.'
+			'A system that generates a full learning curriculum on any topic, including chapters, lessons, and progress tracking.',
+		description: [
+			'You give it a topic, it builds a structured course — chapters, lessons, quizzes, and a progress tracker. The content is generated with LLMs but the structure and flow are designed to feel like a real course.',
+			'Built as an experiment in whether AI-generated educational content can be useful when it is given enough scaffolding and constraints.'
+		],
+		stack: ['Next.js', 'OpenAI API', 'TypeScript', 'Tailwind'],
+		links: [
+			{ label: 'GitHub', href: 'https://github.com/camclarke11/ai-course-builder', kind: 'github' }
+		]
 	},
 	{
+		slug: 'clip-detection-ai',
 		title: 'Clip Detection AI',
 		tag: 'media / ML',
-		href: '/projects',
+		status: 'archived',
 		summary:
-			'Experiments analysing livestream chat and video to detect highlight moments automatically.'
+			'Experiments analysing livestream chat and video to detect highlight moments automatically.',
+		description: [
+			'Livestream content is long and mostly uneventful. This project tried to solve the clipping problem: automatically detecting the moments worth saving.',
+			'It combined chat velocity spikes, audio peaks, and basic sentiment analysis to score segments and suggest clip boundaries. Worked surprisingly well for gaming streams, less so for talk content.'
+		],
+		stack: ['Python', 'FFmpeg', 'scikit-learn', 'Twitch API'],
+		links: [
+			{ label: 'GitHub', href: 'https://github.com/camclarke11/clip-detection', kind: 'github' }
+		]
 	},
 	{
+		slug: 'internet-experiments',
 		title: 'Random Internet Experiments',
 		tag: 'scrapers / tools',
-		href: '/projects',
+		status: 'active',
 		summary:
-			'Scrapers, dashboards, automation tools, and other things that seemed like a good idea at the time.'
+			'Scrapers, dashboards, automation tools, and other things that seemed like a good idea at the time.',
+		description: [
+			'A loose collection of small projects that do not fit anywhere else. Price trackers, data scrapers, notification bots, dashboard prototypes, and various automation scripts.',
+			'Most of these start as "I wonder if I could..." and end up either being genuinely useful or teaching me something interesting about an API or data source.'
+		],
+		stack: ['Python', 'Node.js', 'Various APIs'],
+		links: [
+			{ label: 'GitHub', href: 'https://github.com/camclarke11', kind: 'github' }
+		]
 	}
 ];
 

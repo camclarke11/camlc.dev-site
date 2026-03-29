@@ -3,9 +3,11 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
+	import { beforeNavigate, afterNavigate } from '$app/navigation';
 
 	let { children } = $props();
 	let dividerDirection = $state<'forward' | 'reverse'>('forward');
+	let viewEl = $state<HTMLElement | null>(null);
 
 	const navItems = [
 		{ href: '/', label: 'home' },
@@ -15,6 +17,27 @@
 		{ href: '/pics', label: 'pics' },
 		{ href: '/contact', label: 'contact' }
 	];
+
+	function isActive(pathname: string, href: string): boolean {
+		if (href === '/') return pathname === '/';
+		return pathname === href || pathname.startsWith(href + '/');
+	}
+
+	beforeNavigate(() => {
+		if (viewEl) viewEl.classList.add('view-exit');
+	});
+
+	afterNavigate(() => {
+		if (viewEl) {
+			viewEl.classList.remove('view-exit');
+			viewEl.classList.add('view-enter');
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					if (viewEl) viewEl.classList.remove('view-enter');
+				});
+			});
+		}
+	});
 
 	onMount(() => {
 		let lastPointerX = 0;
@@ -69,14 +92,14 @@
 
 		<nav class="primary-nav" aria-label="Primary">
 			{#each navItems as item}
-				<a class:active={page.url.pathname === item.href} class="nav-link" href={item.href}>
+				<a class:active={isActive(page.url.pathname, item.href)} class="nav-link" href={item.href} aria-current={isActive(page.url.pathname, item.href) ? 'page' : undefined}>
 					{item.label}
 				</a>
 			{/each}
 		</nav>
 	</header>
 
-	<div class="site-view">
+	<div class="site-view" bind:this={viewEl}>
 		{@render children()}
 	</div>
 </div>

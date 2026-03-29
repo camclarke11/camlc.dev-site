@@ -45,15 +45,6 @@
 		}
 	}
 
-	function handlePreviewClick(event: MouseEvent, id: string) {
-		if (pinnedPreviewId === id) {
-			return;
-		}
-
-		event.preventDefault();
-		pinnedPreviewId = id;
-	}
-
 	function handlePreviewFocusOut(event: FocusEvent, id: string) {
 		const nextTarget = event.relatedTarget;
 		if (
@@ -286,8 +277,7 @@
 									>
 										<a
 											class="item-title"
-											href={project.href}
-											onclick={(event) => handlePreviewClick(event, `project-${project.title}`)}
+											href={`/projects/${project.slug}`}
 										>
 											{project.title}
 										</a>
@@ -324,7 +314,6 @@
 										<a
 											class="item-title"
 											href={topic.href}
-											onclick={(event) => handlePreviewClick(event, `writing-${topic.title}`)}
 										>
 											{topic.title}
 										</a>
@@ -361,7 +350,6 @@
 										<a
 											class="item-title"
 											href={note.href}
-											onclick={(event) => handlePreviewClick(event, `philosophy-${note.title}`)}
 										>
 											{note.title}
 										</a>

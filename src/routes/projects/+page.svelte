@@ -14,12 +14,22 @@
 	<section class="route-block">
 		<p class="section-label">examples</p>
 		<div class="route-list">
-			{#each projects as item}
-				<div class="route-item">
-					<a class="route-item-title" href={item.href}>{item.title}</a>
-					<div class="route-item-meta">{item.tag}</div>
-					<div class="route-item-copy">{item.summary}</div>
-				</div>
+			{#each projects as project, i}
+				<a class="project-card" href={`/projects/${project.slug}`}>
+					<div class="project-card-top">
+						<span class="project-card-index">{String(i + 1).padStart(2, '0')}</span>
+						<h2 class="project-card-title">{project.title}</h2>
+						<span class="showcase-status" data-status={project.status}>{project.status}</span>
+					</div>
+					<div class="project-card-meta">{project.tag}</div>
+					<p class="project-card-summary">{project.summary}</p>
+					<div class="project-card-stack">
+						{#each project.stack as tech}
+							<span class="showcase-tag">{tech}</span>
+						{/each}
+					</div>
+					<span class="project-card-arrow">→</span>
+				</a>
 			{/each}
 		</div>
 	</section>

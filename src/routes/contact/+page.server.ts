@@ -14,7 +14,14 @@ type ContactFields = {
 };
 
 type ContactEmailBinding = {
-	send: (message: unknown) => Promise<void>;
+	send: (message: {
+		from: string;
+		to: string | string[];
+		subject: string;
+		replyTo?: string;
+		text?: string;
+		html?: string;
+	}) => Promise<void>;
 };
 
 function getField(formData: FormData, key: keyof ContactFields, maxLength: number) {
@@ -22,24 +29,8 @@ function getField(formData: FormData, key: keyof ContactFields, maxLength: numbe
 	return typeof value === 'string' ? value.trim().slice(0, maxLength) : '';
 }
 
-function escapeHeader(value: string) {
-	return value.replace(/[\r\n]+/g, ' ').trim();
-}
-
-function buildRawEmail(fields: ContactFields) {
-	const messageId = `<${crypto.randomUUID()}@camlc.dev>`;
-
+function buildPlainTextEmail(fields: ContactFields) {
 	return [
-		`Date: ${new Date().toUTCString()}`,
-		`From: camlc.dev contact form <${CONTACT_SENDER}>`,
-		`To: <${CONTACT_DESTINATION}>`,
-		`Message-ID: ${messageId}`,
-		`Reply-To: ${escapeHeader(fields.email)}`,
-		'Subject: New contact form submission from camlc.dev',
-		'MIME-Version: 1.0',
-		'Content-Type: text/plain; charset=UTF-8',
-		'Content-Transfer-Encoding: 8bit',
-		'',
 		'You received a new message from the contact form on camlc.dev.',
 		'',
 		`Name: ${fields.name}`,
@@ -85,7 +76,7 @@ export const actions = {
 			});
 		}
 
-		const emailBinding = (platform?.env as Env & { CONTACT_EMAIL?: ContactEmailBinding } | undefined)
+		const emailBinding = (platform?.env as { CONTACT_EMAIL?: ContactEmailBinding } | undefined)
 			?.CONTACT_EMAIL;
 
 		if (!emailBinding) {
@@ -98,19 +89,17 @@ export const actions = {
 		}
 
 		try {
-			const { EmailMessage } = await import('cloudflare:email');
-
-			const message = new EmailMessage(
-				CONTACT_SENDER,
-				CONTACT_DESTINATION,
-				buildRawEmail(values)
-			);
-
-			await emailBinding.send(message);
+			await emailBinding.send({
+				from: CONTACT_SENDER,
+				to: CONTACT_DESTINATION,
+				subject: 'New contact form submission from camlc.dev',
+				replyTo: values.email,
+				text: buildPlainTextEmail(values)
+			});
 
 			return {
 				success: true,
-				message: 'Message sent. I’ll reply from camlc@proton.me.',
+				message: "Message sent. I'll reply from camlc@proton.me.",
 				values: {
 					name: '',
 					email: '',
