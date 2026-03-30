@@ -8,6 +8,14 @@
 	let hasPrev = $derived(activeIndex > 0);
 	let hasNext = $derived(activeIndex >= 0 && activeIndex < photoFrames.length - 1);
 
+	$effect(() => {
+		document.body.classList.toggle('pics-lightbox-open', activeFrame !== null);
+
+		return () => {
+			document.body.classList.remove('pics-lightbox-open');
+		};
+	});
+
 	const openFrame = (index: number) => {
 		activeIndex = index;
 	};
@@ -49,8 +57,6 @@
 </svelte:head>
 
 <svelte:window onkeydown={handleKeydown} />
-<svelte:body class:pics-lightbox-open={activeFrame !== null} />
-
 <section class:blurred={activeFrame !== null} class="route-page route-page-wide pics-page">
 	<header class="route-header pics-header">
 		<p class="section-label">photo index</p>
