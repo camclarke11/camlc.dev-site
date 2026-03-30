@@ -1487,23 +1487,53 @@ a.item-title:focus-visible {
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: 3.2rem;
+  height: 3.2rem;
   padding: 0;
-  border: 1px solid rgba(242, 242, 242, 0.16);
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  border: 1px solid rgba(242, 242, 242, 0.18);
+  border-radius: 999px;
+  background: rgba(12, 12, 12, 0.52);
+  backdrop-filter: blur(14px) saturate(0.92);
   color: var(--text);
-  font-size: 1.1rem;
   cursor: pointer;
-  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+  box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.22);
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease,
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.pic-lightbox-nav svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .pic-lightbox-nav:hover,
 .pic-lightbox-nav:focus-visible {
   border-color: var(--accent-hover);
   color: var(--accent-hover);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(10, 10, 10, 0.74);
+  transform: translateY(-50%) scale(1.03);
+}
+
+.pic-lightbox-nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+  transform: translateY(-50%);
+}
+
+.pic-lightbox-nav:disabled:hover,
+.pic-lightbox-nav:disabled:focus-visible {
+  border-color: rgba(242, 242, 242, 0.18);
+  color: var(--text);
+  background: rgba(12, 12, 12, 0.52);
 }
 
 .pic-lightbox-prev {
@@ -1686,7 +1716,17 @@ a.item-title:focus-visible {
     transform: none;
     width: 2.6rem;
     height: 2.6rem;
-    font-size: 0.95rem;
+  }
+
+  .pic-lightbox-nav:hover,
+  .pic-lightbox-nav:focus-visible,
+  .pic-lightbox-nav:disabled {
+    transform: none;
+  }
+
+  .pic-lightbox-nav svg {
+    width: 0.95rem;
+    height: 0.95rem;
   }
 
   .pic-lightbox-prev {

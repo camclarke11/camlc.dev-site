@@ -2,32 +2,45 @@
 	import { photoFrames } from '$lib/site-content';
 
 	const photoCount = `[${String(photoFrames.length).padStart(2, '0')}]`;
-	let activeFrame = $state<(typeof photoFrames)[number] | null>(null);
 	let loadedFrames = $state<Record<string, boolean>>({});
-	let activeIndex = $derived(activeFrame ? photoFrames.indexOf(activeFrame) : -1);
+	let activeIndex = $state(-1);
+	let activeFrame = $derived(activeIndex >= 0 ? photoFrames[activeIndex] : null);
 	let hasPrev = $derived(activeIndex > 0);
 	let hasNext = $derived(activeIndex >= 0 && activeIndex < photoFrames.length - 1);
 
-	const openFrame = (frame: (typeof photoFrames)[number]) => {
-		activeFrame = frame;
+	const openFrame = (index: number) => {
+		activeIndex = index;
 	};
 
 	const closeFrame = () => {
-		activeFrame = null;
+		activeIndex = -1;
 	};
 
 	const goToPrev = () => {
-		if (hasPrev) activeFrame = photoFrames[activeIndex - 1];
+		if (hasPrev) activeIndex -= 1;
 	};
 
 	const goToNext = () => {
-		if (hasNext) activeFrame = photoFrames[activeIndex + 1];
+		if (hasNext) activeIndex += 1;
 	};
 
 	const handleKeydown = (event: KeyboardEvent) => {
-		if (event.key === 'Escape') closeFrame();
-		if (event.key === 'ArrowLeft') goToPrev();
-		if (event.key === 'ArrowRight') goToNext();
+		if (activeIndex < 0) return;
+
+		if (event.key === 'Escape') {
+			event.preventDefault();
+			closeFrame();
+		}
+
+		if (event.key === 'ArrowLeft') {
+			event.preventDefault();
+			goToPrev();
+		}
+
+		if (event.key === 'ArrowRight') {
+			event.preventDefault();
+			goToNext();
+		}
 	};
 </script>
 
@@ -51,13 +64,13 @@
 	</header>
 
 	<section class="pics-grid" aria-label="Photo grid">
-		{#each photoFrames as frame}
+		{#each photoFrames as frame, index}
 			<figure class:pic-card-loaded={loadedFrames[frame.src]} class="pic-card">
 				<button
 					class="pic-button"
 					type="button"
 					onclick={() => {
-						openFrame(frame);
+						openFrame(index);
 					}}
 					aria-label={`Open ${frame.label}`}
 				>
@@ -90,17 +103,31 @@
 	>
 		<button class="pic-lightbox-backdrop" type="button" aria-label="Close image" onclick={closeFrame}></button>
 
-		{#if hasPrev}
-			<button class="pic-lightbox-nav pic-lightbox-prev" type="button" aria-label="Previous image" onclick={goToPrev}>
-				&larr;
-			</button>
-		{/if}
+		<button
+			class="pic-lightbox-nav pic-lightbox-prev"
+			type="button"
+			aria-label="Previous image"
+			aria-keyshortcuts="ArrowLeft"
+			onclick={goToPrev}
+			disabled={!hasPrev}
+		>
+			<svg viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M14.5 5.5 8 12l6.5 6.5" />
+			</svg>
+		</button>
 
-		{#if hasNext}
-			<button class="pic-lightbox-nav pic-lightbox-next" type="button" aria-label="Next image" onclick={goToNext}>
-				&rarr;
-			</button>
-		{/if}
+		<button
+			class="pic-lightbox-nav pic-lightbox-next"
+			type="button"
+			aria-label="Next image"
+			aria-keyshortcuts="ArrowRight"
+			onclick={goToNext}
+			disabled={!hasNext}
+		>
+			<svg viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M9.5 5.5 16 12l-6.5 6.5" />
+			</svg>
+		</button>
 
 		<figure class="pic-lightbox-frame">
 			<img class="pic-lightbox-image" src={activeFrame.src} alt={activeFrame.alt} loading="eager" />
