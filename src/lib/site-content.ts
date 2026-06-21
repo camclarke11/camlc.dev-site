@@ -78,119 +78,91 @@ export type Project = {
 
 export const projects: Project[] = [
 	{
-		slug: 'smart-data-mapping',
-		title: 'Smart Data Mapping',
-		tag: 'policy / systems',
+		slug: 'prepr',
+		title: 'prepr',
+		tag: 'pwa / product',
 		status: 'active',
-		summary: 'Tools and visualisations exploring how data portability could work across sectors.',
+		summary:
+			'A shared grocery list, recipe box, meal planner, and pantry — an offline-first PWA with no account needed.',
 		motivation:
-			'Smart Data policy is spread across multiple sectors, each with its own standards and timelines. There was no single view of how these schemes relate to each other or where they share common infrastructure. I wanted to build one.',
+			'The weekly food shop is a mess of half-remembered lists, duplicated items, and "do we already have pasta?". I wanted one calm place to save recipes, plan the week, and build a shared list that still works with no signal in the supermarket.',
 		description: [
-			'Smart Data schemes give people the right to share their data with authorised third parties. This project maps out how those schemes connect, where the standards overlap, and where they diverge.',
-			'The goal is to make the cross-sector landscape legible — which sectors have mandated APIs, what data is portable, and where the gaps are.'
+			'prepr is an installable PWA with four connected pieces: a categorised shopping list, a searchable recipe box, a Mon–Sun meal planner, and a pantry of staples. Data lives on the device, so it loads instantly and works fully offline — no sign-up.',
+			'The pieces feed each other: assign recipes to days, then add the whole week to your list with quantities aggregated across meals and pantry staples skipped automatically.'
 		],
 		features: [
-			'Interactive map of UK Smart Data schemes and their regulatory status',
-			'Cross-sector comparison of API standards, data types, and consent models',
-			'Visual timeline of scheme milestones and upcoming deadlines',
-			'Filterable by sector, data type, and implementation stage'
+			'Categorised, colour-coded shopping list with one-tap "in cart" and undo',
+			'Recipe box searchable by name or ingredient, scalable by serving count',
+			'Mon–Sun meal planner that adds an entire week to the list at once',
+			'Pantry of staples that are skipped automatically when adding recipes',
+			'Installable, offline-first PWA with light/dark themes and JSON export/import'
 		],
 		lessons: [
-			'Policy data is messy. Half the challenge was deciding what counted as a "scheme" versus a proposal versus a consultation.',
-			'D3 force layouts are great for showing relationships but terrible for conveying hierarchy. Ended up using a hybrid approach.',
-			'The most useful output turned out to be the simplest — a plain table comparing schemes side by side.'
+			'Keeping the core logic in pure, unit-tested functions — separate from the React layer — made the list/recipe/pantry interactions far easier to reason about and change.',
+			'Offline-first with local storage is liberating for a personal app: no auth, no backend, instant loads. The trade-off is that every hard problem (merging, import/export) moves into the client.',
+			'A shopping app lives or dies on speed in the aisle. Optimising for one-tap actions mattered more than any single feature.'
 		],
-		stack: ['SvelteKit', 'D3', 'TypeScript'],
+		stack: ['React', 'TypeScript', 'Vite', 'PWA / Workbox', 'Vitest'],
 		links: [
-			{ label: 'GitHub', href: 'https://github.com/camclarke11/smart-data-mapping', kind: 'github' }
+			{ label: 'Live', href: 'https://prepr.camlc.dev', kind: 'live' },
+			{ label: 'GitHub', href: 'https://github.com/camclarke11/prepr', kind: 'github' }
 		]
 	},
 	{
-		slug: 'ai-course-builder',
-		title: 'AI Course Builder',
-		tag: 'AI / product',
+		slug: 'world-cup-league',
+		title: 'World Cup 2026 Prediction League',
+		tag: 'full-stack / web app',
 		status: 'active',
 		summary:
-			'A system that generates a full learning curriculum on any topic, including chapters, lessons, and progress tracking.',
+			'A private prediction league for the 2026 World Cup — call every scoreline before kickoff and climb the leaderboard.',
 		motivation:
-			'Most AI-generated educational content is flat — a wall of text with no structure. I wanted to see if wrapping LLM output in a proper course framework (chapters, progression, quizzes) would make it actually useful for learning.',
+			'I wanted a prediction game to run with friends for the 2026 World Cup, but the existing ones are clunky, ad-heavy, or demand an account for everything. So I built a small private league: join with a share code, predict scorelines, compete on a leaderboard.',
 		description: [
-			'You give it a topic, it builds a structured course — chapters, lessons, quizzes, and a progress tracker. The content is generated with LLMs but the structure and flow are designed to feel like a real course.',
-			'Built as an experiment in whether AI-generated educational content can be useful when it is given enough scaffolding and constraints.'
+			'Members join a private league via a share code and predict the scoreline of every match before kickoff. Points are awarded by accuracy — 5 for an exact score, 3 for the right result and goal difference, 1 for the right result — and the leaderboard updates as results land.',
+			'Two rules carry the integrity of the game, and both are enforced in the data layer rather than just the UI: predictions lock at kickoff (checked against the stored kickoff time on the server) and stay hidden from other members until a match has started.'
 		],
 		features: [
-			'Generates a full course outline from a single topic prompt',
-			'Each lesson has structured content, key takeaways, and quiz questions',
-			'Progress tracking with completion state per lesson and chapter',
-			'Adaptive difficulty — later lessons reference earlier material'
+			'Private leagues joined with a share code, with a live leaderboard',
+			'Tiered scoring (exact / result + goal difference / result) with server-enforced kickoff locking',
+			'Predictions hidden from others until kickoff, enforced in the data layer',
+			'Passwordless magic-link sign-in, plus optional passkeys and Google',
+			'Automated results sync on a Cloudflare cron, with admin manual entry as the source of truth'
 		],
 		lessons: [
-			'The quality of generated content is almost entirely a function of how constrained the prompt is. Open-ended prompts produce generic slop; structured schemas produce something you can actually learn from.',
-			'Progress tracking changed how people used it. Without it, they skimmed. With it, they actually worked through lessons in order.',
-			'Quizzes are the hardest part to generate well. Multiple-choice distractors need to be plausible but wrong, which LLMs find surprisingly difficult.'
+			'Correctness rules like "lock at kickoff" and "hide predictions" have to live in the data layer. If they only exist in the UI, they are not really enforced.',
+			'Idempotent scoring matters: a finished match should never be silently re-scored, whether the result arrives from the API or an admin. Designing the sync to be a safe no-op without an API key kept it robust.',
+			'Running Next.js on Cloudflare Workers via OpenNext is great on the free tier, but the toolchain has sharp edges — Turbopack server chunks fail at runtime, so the build has to stay on webpack.'
 		],
-		stack: ['Next.js', 'OpenAI API', 'TypeScript', 'Tailwind'],
-		links: [
-			{ label: 'GitHub', href: 'https://github.com/camclarke11/ai-course-builder', kind: 'github' }
-		]
+		stack: ['Next.js', 'TypeScript', 'Cloudflare Workers', 'D1', 'better-auth', 'Tailwind'],
+		links: [{ label: 'Live', href: 'https://wc.camlc.dev', kind: 'live' }]
 	},
 	{
-		slug: 'clip-detection-ai',
-		title: 'Clip Detection AI',
-		tag: 'media / ML',
-		status: 'archived',
-		summary:
-			'Experiments analysing livestream chat and video to detect highlight moments automatically.',
-		motivation:
-			'A typical livestream is 4-8 hours. The highlights are maybe 10 minutes total. Manually scrubbing through footage to find them is painful. I wanted to automate the detection of "something interesting just happened" using signals that are already available.',
-		description: [
-			'Livestream content is long and mostly uneventful. This project tried to solve the clipping problem: automatically detecting the moments worth saving.',
-			'It combined chat velocity spikes, audio peaks, and basic sentiment analysis to score segments and suggest clip boundaries. Worked surprisingly well for gaming streams, less so for talk content.'
-		],
-		features: [
-			'Real-time chat velocity analysis with configurable spike thresholds',
-			'Audio peak detection using FFmpeg waveform extraction',
-			'Sentiment scoring on chat messages to distinguish hype from noise',
-			'Automatic clip boundary suggestion with adjustable padding'
-		],
-		lessons: [
-			'Chat velocity alone gets you 70% of the way. Adding audio and sentiment analysis improved precision but the marginal gain was smaller than expected.',
-			'Gaming streams have very clear signal patterns (emote spam, all-caps). Talk streams are much harder because the interesting moments are quieter.',
-			'Archived this because the Twitch API changes made the real-time chat ingestion more fragile than it was worth maintaining.'
-		],
-		stack: ['Python', 'FFmpeg', 'scikit-learn', 'Twitch API'],
-		links: [
-			{ label: 'GitHub', href: 'https://github.com/camclarke11/clip-detection', kind: 'github' }
-		]
-	},
-	{
-		slug: 'internet-experiments',
-		title: 'Random Internet Experiments',
-		tag: 'scrapers / tools',
+		slug: 'housetrackr',
+		title: 'HouseTrackr',
+		tag: 'scraping / tools',
 		status: 'active',
 		summary:
-			'Scrapers, dashboards, automation tools, and other things that seemed like a good idea at the time.',
+			'A private house-hunting tracker that scrapes listings into one shared, synced dataset with map, table, and compare views.',
 		motivation:
-			'Sometimes you just want to answer a question, and the fastest way to answer it is to write a script. This is the collection of scripts that grew into something slightly bigger than a one-off.',
+			'House-hunting means the same listings scattered across portals, spreadsheets, and screenshots, with no shared view between two people looking together. I wanted one place that pulls listings in automatically and keeps a single synced dataset we could both annotate.',
 		description: [
-			'A loose collection of small projects that do not fit anywhere else. Price trackers, data scrapers, notification bots, dashboard prototypes, and various automation scripts.',
-			'Most of these start as "I wonder if I could..." and end up either being genuinely useful or teaching me something interesting about an API or data source.'
+			'A Playwright scraper pulls property listings into a shared dataset in Cloudflare KV that syncs across devices, so two people always see the same data. The app presents it as cards, a sortable table, a map, a calendar of viewings, a side-by-side compare view, and an inbox of new listings.',
+			'Cloudflare Workers AI extracts floor area from listing text, web push sends alerts when new properties appear, and the whole thing sits behind Cloudflare Access so it stays private.'
 		],
 		features: [
-			'Price tracking scrapers with change notifications',
-			'Data pipeline prototypes for various public APIs',
-			'Dashboard templates for quick data visualisation',
-			'Automation scripts and notification bots'
+			'Playwright scraper that pulls listings into a single shared dataset',
+			'Cards, table, map, calendar, compare, and inbox views over the same data',
+			'Cross-device sync via Cloudflare KV',
+			'Floor-area extraction with Cloudflare Workers AI',
+			'Web-push alerts for new listings, all behind Cloudflare Access'
 		],
 		lessons: [
-			'The best scrapers are the ones you forget about until they send you an alert. Resilience matters more than features.',
-			'Public APIs change without warning. The scrapers that survived longest were the ones with the simplest dependencies.',
-			'Half of these projects taught me more about rate limiting and retry logic than about the actual data.'
+			'Shared state is deceptively hard. The first sync design lost data under concurrent edits (last-write-wins); fixing that properly was most of the work.',
+			'A scraper is only as good as its resilience. Validating scraped data before it touches the dataset saved a lot of cleanup later.',
+			'Workers AI on the free tier is a surprisingly practical way to turn messy listing text into a structured field like floor area.'
 		],
-		stack: ['Python', 'Node.js', 'Various APIs'],
-		links: [
-			{ label: 'GitHub', href: 'https://github.com/camclarke11', kind: 'github' }
-		]
+		stack: ['Cloudflare Workers', 'KV', 'Workers AI', 'Playwright', 'React'],
+		links: []
 	}
 ];
 
