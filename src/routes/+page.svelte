@@ -200,11 +200,8 @@
 						<section class="column-section">
 							<p class="section-label">intro</p>
 							<div class="mono-display">
-								{#each introParagraphs as paragraph, index}
+								{#each introParagraphs as paragraph}
 									<p>{paragraph}</p>
-									{#if index < introParagraphs.length - 1}
-										<br />
-									{/if}
 								{/each}
 							</div>
 						</section>
